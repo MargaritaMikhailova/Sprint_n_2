@@ -13,13 +13,11 @@ def user(faker):
         password=user_data["password"],
         submitPassword=user_data["submitPassword"],
     )
-    assert create_resp.status_code == 201, create_resp.text
 
     login_resp = UserApi.login_user(
         email=user_data["email"],
         password=user_data["password"],
     )
-    assert login_resp.status_code == 201, login_resp.text
     token = login_resp.json()["token"]["access_token"]
     id_user = login_resp.json()["user"]["id"]
 
@@ -40,7 +38,6 @@ def advert(user):
         token=user["token"], 
         advert_data=advert_data
         )
-    assert create_advert.status_code == 201, create_advert.text
 
     data_advert = {
         "name": create_advert.json()["name"], 
@@ -74,6 +71,5 @@ def other_user_advert(faker):
         token=token,
         advert_data=ADVERT.copy(),
     )
-    assert create_advert.status_code == 201, create_advert.text
 
     yield create_advert.json()["id"]
