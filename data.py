@@ -9,7 +9,6 @@ class EndPoint:
     CREATE_ADVERT = '/api/create-listing'
     UPDATE_ADVERT = '/api/update-offer/{id}'
     DELETE_ADVERT = '/api/listings/{id}'
-    
 
 class Domain:
     DOMAIN = "mail.com"

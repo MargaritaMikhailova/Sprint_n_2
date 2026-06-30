@@ -15,6 +15,7 @@ class UserApi:
         payload = {"email": email, "password": password}
         return requests.post(f"{Urls.MAIN_URL}{EndPoint.USER_LOGIN}", json=payload, timeout=30)
     
+    
 class AdvertApi:
 
     @staticmethod

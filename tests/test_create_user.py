@@ -2,12 +2,19 @@ import allure
 
 from message import ErrorMessage
 from API_base import UserApi
+from factory import UserFactory
 
 class TestCreateUser:
 
     @allure.title('Успешная регстрация новго пользователя')
-    def test_create_user_successful(self, user):
-        create_resp = user["create_response"]
+    def test_create_user_successful(self, faker):
+        user_data = UserFactory.create_user(faker)
+
+        create_resp = UserApi.create_user(
+            email=user_data["email"],
+            password=user_data["password"],
+            submitPassword=user_data["password"]
+        )
         assert create_resp.status_code == 201
         assert "id" in create_resp.json()["user"]
 

@@ -30,6 +30,7 @@ def user(faker):
     }
 
 
+
 @pytest.fixture
 def advert(user):
     advert_data = ADVERT.copy()
@@ -66,6 +67,7 @@ def other_user_advert(faker):
         password=user_data["password"],
     )
     token = login_resp.json()["token"]["access_token"]
+    id_user = login_resp.json()["user"]["id"]
 
     create_advert = AdvertApi.create_advert(
         token=token,
