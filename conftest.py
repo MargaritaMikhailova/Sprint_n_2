@@ -21,7 +21,7 @@ def user(faker):
     token = login_resp.json()["token"]["access_token"]
     id_user = login_resp.json()["user"]["id"]
 
-    yield {
+    return {
         "email": user_data["email"],
         "password": user_data["password"],
         "token": token,
@@ -49,7 +49,7 @@ def advert(user):
         "id": create_advert.json()["id"]
     } 
 
-    yield data_advert
+    return data_advert
     
 
 @pytest.fixture
@@ -72,4 +72,4 @@ def other_user_advert(faker):
         advert_data=ADVERT.copy(),
     )
 
-    yield create_advert.json()["id"]
+    return create_advert.json()["id"]
