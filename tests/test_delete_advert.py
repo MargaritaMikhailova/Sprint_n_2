@@ -7,6 +7,7 @@ from message import ErrorMessage
 class TestDeleteAdvert:
 
     @allure.title('Успешное удаление объявления')
+    
     def test_delete_advert(self, user, advert):
         response_advert = AdvertApi.delete_advert(
             token=user["token"],

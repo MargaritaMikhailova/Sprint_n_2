@@ -50,7 +50,13 @@ def advert(user):
         "id": create_advert.json()["id"]
     } 
 
-    return data_advert
+    yield data_advert
+
+    AdvertApi.delete_advert(
+        token=user["token"],
+        id=str(data_advert["id"])
+    )
+
     
 
 @pytest.fixture
@@ -67,11 +73,17 @@ def other_user_advert(faker):
         password=user_data["password"],
     )
     token = login_resp.json()["token"]["access_token"]
-    id_user = login_resp.json()["user"]["id"]
 
     create_advert = AdvertApi.create_advert(
         token=token,
         advert_data=ADVERT.copy(),
     )
 
-    return create_advert.json()["id"]
+    advert_id = create_advert.json()["id"]
+
+    yield advert_id
+
+    AdvertApi.delete_advert(
+        token=token, 
+        id=str(advert_id)
+    )
